@@ -1,16 +1,9 @@
 require File.join File.dirname(__FILE__), 'lib/glamazon'
-require 'spec/rake/spectask'
-require 'rake/gempackagetask'
+require 'rubygems'
+require 'rspec/core/rake_task'
 
-spec = eval(File.read('glamazon.gemspec'))
-
-Rake::GemPackageTask.new(spec) do |p|
-  p.gem_spec = spec
-end
-
-Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/*.rb']
-  t.spec_opts  = %w<-c>
-end
-
+desc 'Default: run specs.'
 task :default => :spec
+
+desc "Run specs"
+RSpec::Core::RakeTask.new
